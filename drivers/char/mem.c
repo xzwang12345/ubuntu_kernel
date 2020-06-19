@@ -8,6 +8,7 @@
  *  Shared /dev/zero mmapping support, Feb 2000, Kanoj Sarcar <kanoj@sgi.com>
  */
 
+#include <linux/module.h>
 #include <linux/mm.h>
 #include <linux/miscdevice.h>
 #include <linux/slab.h>
@@ -756,6 +757,8 @@ static loff_t memory_lseek(struct file *file, loff_t offset, int orig)
 
 static int open_port(struct inode *inode, struct file *filp)
 {
+	if (secure_modules())
+		return -EPERM;
 	return capable(CAP_SYS_RAWIO) ? 0 : -EPERM;
 }
 
