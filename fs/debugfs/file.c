@@ -106,6 +106,9 @@ static int open_proxy_open(struct inode *inode, struct file *filp)
 	const struct file_operations *real_fops = NULL;
 	int srcu_idx, r;
 
+	if (secure_modules())
+		return -EPERM;
+
 	r = debugfs_use_file_start(dentry, &srcu_idx);
 	if (r) {
 		r = -ENOENT;
@@ -234,6 +237,9 @@ static int full_proxy_open(struct inode *inode, struct file *filp)
 	const struct file_operations *real_fops = NULL;
 	struct file_operations *proxy_fops = NULL;
 	int srcu_idx, r;
+
+	if (secure_modules())
+		return -EPERM;
 
 	r = debugfs_use_file_start(dentry, &srcu_idx);
 	if (r) {
