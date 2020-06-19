@@ -428,6 +428,8 @@ endif
 	install -d $(dkms_dir) $(dkms_dir)/headers $(dkms_dir)/build $(dkms_dir)/source
 	cp -rp "$(hdrdir)" "$(indep_hdrdir)" "$(dkms_dir)/headers"
 
+	$(if $(filter true,$(do_dkms_wireguard)),$(call build_dkms, $(mods_pkg_name)-$*, $(pkgdir)/lib/modules/$(abi_release)-$*/kernel, wireguard, pool/universe/w/wireguard-linux-compat/wireguard-dkms_$(dkms_wireguard_version)_all.deb))
+
 	# Build the final ABI information.
 	install -d $(abidir)
 	sed -e 's/^\(.\+\)[[:space:]]\+\(.\+\)[[:space:]]\(.\+\)$$/\3 \2 \1/'	\
