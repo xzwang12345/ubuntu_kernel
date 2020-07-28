@@ -17,3 +17,4 @@ do_tools_cpupower = true
 do_tools_perf     = true
 
 do_zfs		= true
+do_dkms_wireguard = true

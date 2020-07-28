@@ -35,5 +35,6 @@ do_zfs_powerpc-smp	= false
 # do_zfs_powerpc64-smp	= true
 do_zfs_powerpc-e500mc	= false
 do_zfs_powerpc64-emb	= false
+do_dkms_wireguard = true
 
 family			= ubuntu
